@@ -1,0 +1,285 @@
+<!DOCTYPE html>
+<html lang="ja">
+<head>
+<meta charset="UTF-8">
+<title>喫茶吉田</title>
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+<style>
+body {
+  margin: 0;
+  font-family: "Hiragino Kaku Gothic ProN", "Yu Gothic", sans-serif;
+  background: #f3e6d6;
+  color: #333;
+}
+
+.container {
+  max-width: 900px;
+  margin: 0 auto;
+  background: #f6e9d9;
+  padding: 20px;
+}
+
+/* 店名 */
+.shop-name {
+  display: flex;
+  border: 2px solid #b8a38a;
+  margin-bottom: 20px;
+}
+
+.shop-name div {
+  padding: 10px 15px;
+  background: #efe1cf;
+}
+
+.shop-name div:first-child {
+  width: 80px;
+  font-weight: bold;
+}
+
+.shop-name div:last-child {
+  flex: 1;
+}
+
+/* メイン */
+.main {
+  display: flex;
+  gap: 20px;
+}
+
+.left {
+  flex: 2;
+}
+
+.left img {
+  width: 100%;
+  border-radius: 4px;
+}
+
+.info {
+  margin-top: 15px;
+  display: flex;
+  justify-content: space-between;
+  font-size: 14px;
+}
+
+.info ul {
+  padding-left: 18px;
+}
+
+.right {
+  flex: 1;
+  font-size: 14px;
+}
+
+.right img {
+  width: 100%;
+  border-radius: 4px;
+}
+
+.owner-box {
+  margin-top: 10px;
+  background: #efe1cf;
+  padding: 10px;
+}
+
+/* セクション */
+.section-title {
+  text-align: center;
+  margin: 40px 0 20px;
+  font-weight: bold;
+  border-top: 1px solid #b8a38a;
+  padding-top: 15px;
+}
+
+/* メニュー */
+.menu {
+  display: grid;
+  grid-template-columns: repeat(3, 1fr);
+  gap: 20px;
+}
+
+.menu-item {
+  text-align: center;
+  font-size: 14px;
+}
+
+.menu-item img {
+  width: 100%;
+  border-radius: 4px;
+}
+
+/* アクセス */
+.access {
+  margin-top: 30px;
+  display: flex;
+  gap: 20px;
+}
+
+.map-wrapper {
+  cursor: pointer;
+}
+
+.map {
+  width: 320px;
+  height: 240px;
+  border: none;
+  pointer-events: none; /* 通常時は操作不可 */
+}
+
+.access-info {
+  font-size: 14px;
+}
+
+.access-info ul {
+  padding-left: 18px;
+}
+
+/* ===== 地図モーダル ===== */
+.map-modal {
+  display: none;
+  position: fixed;
+  inset: 0;
+  background: rgba(0,0,0,0.85);
+  z-index: 9999;
+}
+
+.map-modal.active {
+  display: block;
+}
+
+.map-modal iframe {
+  width: 100%;
+  height: 100%;
+  border: none;
+}
+
+.map-close {
+  position: absolute;
+  top: 15px;
+  right: 20px;
+  font-size: 32px;
+  color: #fff;
+  cursor: pointer;
+  z-index: 10000;
+}
+</style>
+</head>
+
+<body>
+
+<div class="container">
+
+  <!-- 店名 -->
+  <div class="shop-name">
+    <div>店名</div>
+    <div>喫茶吉田</div>
+  </div>
+
+  <!-- メイン -->
+  <div class="main">
+    <div class="left">
+      <img src="images/shop.jpg" alt="店内写真">
+
+      <div class="info">
+        <div>
+          <strong>お知らせ</strong>
+          <ul>
+            <li>新メニューのお知らせ</li>
+            <li>年末年始の営業</li>
+          </ul>
+        </div>
+
+        <div>
+          <strong>営業時間</strong><br>
+          7:00〜20:00<br>
+          定休日　日曜日
+        </div>
+      </div>
+    </div>
+
+    <div class="right">
+      <img src="images/owner.jpg" alt="オーナー写真">
+
+      <div class="owner-box">
+        <strong>オーナー紹介</strong><br>
+        アイリス　吉田様<br>
+        実際にお話を聞いて、その人の好みに合った豆を挽いて淹れるオリジナルブレンドコーヒーがお勧めです。<br>
+        
+      　Wi-Fi設備で、仕事や勉強にも最適な環境を提供しています。
+       昭和レトロな店内を是非お楽しみください。
+      </div>
+    </div>
+  </div>
+
+  <!-- メニュー -->
+  <div class="section-title">メニュー</div>
+
+  <div class="menu">
+    <div class="menu-item"><img src="images/scone.jpg">スコーン　税込300円　オーナーお勧め</div>
+    <div class="menu-item"><img src="images/cake.jpg">自家製ケーキ　税込500円</div>
+    <div class="menu-item"><img src="images/coffee.jpg">コーヒー　税込400円　オーナーお勧め</div>
+    <div class="menu-item"><img src="images/latte.jpg">カフェラテ　税込450円</div>
+    <div class="menu-item"><img src="images/sandwich.jpg">サンドイッチ　税込500円</div>
+    <div class="menu-item"><img src="images/pudding.jpg">固めのレトロプリン　税込300円</div>
+  </div>
+
+  <!-- アクセス -->
+  <div class="section-title">アクセス</div>
+
+  <div class="access">
+    <div class="map-wrapper" onclick="openMap()">
+      <iframe
+        class="map"
+        src="https://www.google.com/maps?q=香川県高松市常磐町1-3-1&z=15&output=embed"
+        loading="lazy">
+      </iframe>
+    </div>
+
+    <div class="access-info">
+      <ul>
+        <li>香川県高松市常磐町1-3-1</li>
+        <li>創業　1974年</li>
+        <li>電話番号　090-0000-0000</li>
+        <li>
+          実際にお話を聞いて、その人の好みに合った豆を挽いて淹れるオリジナルブレンドコーヒーが特徴です。</li>
+
+        <li>Wi-Fi設備あり</li>
+        <li>支払方法　現金のみ対応</li>
+        <li>ペットは、テラス席に限り同伴可</li>
+        <li>子供連れ大歓迎
+          ベビーカーでの入店可、オムツの替え台あり</li>
+        <li>座席は、カウンター席6席、テーブル席6席</li>
+        <li>全席喫煙可</li>
+      </ul>
+    </div>
+  </div>
+
+</div>
+
+<!-- 全画面地図（★ここだけ変更） -->
+<div class="map-modal" id="mapModal">
+  <div class="map-close" onclick="closeMap()">×</div>
+  <iframe
+    src="https://www.google.com/maps?output=embed&hl=ja&q=香川県高松市常磐町1-3-1&z=18">
+  </iframe>
+</div>
+
+<script>
+function openMap() {
+  document.getElementById("mapModal").classList.add("active");
+}
+
+function closeMap() {
+  document.getElementById("mapModal").classList.remove("active");
+}
+
+document.addEventListener("keydown", function(e) {
+  if (e.key === "Escape") {
+    closeMap();
+  }
+});
+</script>
+
+</body>
+</html>
