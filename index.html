@@ -2,7 +2,7 @@
 <html lang="ja">
 <head>
 <meta charset="UTF-8">
-<title>喫茶吉田　(架空教材)</title>
+<title>喫茶吉田 </title>
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
 
 <style>
@@ -14,10 +14,10 @@ body {
 }
 
 .container {
-  max-width: 900px;
+  max-width: 960px;
   margin: 0 auto;
   background: #f6e9d9;
-  padding: 20px;
+  padding: 16px;
 }
 
 /* 店名 */
@@ -28,13 +28,14 @@ body {
 }
 
 .shop-name div {
-  padding: 10px 15px;
+  padding: 10px;
   background: #efe1cf;
 }
 
 .shop-name div:first-child {
   width: 80px;
   font-weight: bold;
+  text-align: center;
 }
 
 .shop-name div:last-child {
@@ -45,21 +46,26 @@ body {
 .main {
   display: flex;
   gap: 20px;
+  flex-wrap: wrap;
 }
 
-.left {
-  flex: 2;
-}
-
-.left img {
+.left, .right {
   width: 100%;
-  border-radius: 4px;
 }
 
+.left img,
+.right img {
+  width: 100%;
+  height: auto;
+  border-radius: 6px;
+}
+
+/* 情報 */
 .info {
   margin-top: 15px;
   display: flex;
-  justify-content: space-between;
+  gap: 20px;
+  flex-wrap: wrap;
   font-size: 14px;
 }
 
@@ -67,20 +73,12 @@ body {
   padding-left: 18px;
 }
 
-.right {
-  flex: 1;
-  font-size: 14px;
-}
-
-.right img {
-  width: 100%;
-  border-radius: 4px;
-}
-
+/* オーナー */
 .owner-box {
   margin-top: 10px;
   background: #efe1cf;
-  padding: 10px;
+  padding: 12px;
+  font-size: 14px;
 }
 
 /* セクション */
@@ -95,8 +93,8 @@ body {
 /* メニュー */
 .menu {
   display: grid;
-  grid-template-columns: repeat(3, 1fr);
-  gap: 20px;
+  grid-template-columns: repeat(2, 1fr);
+  gap: 16px;
 }
 
 .menu-item {
@@ -106,13 +104,14 @@ body {
 
 .menu-item img {
   width: 100%;
-  border-radius: 4px;
+  height: auto;
+  border-radius: 6px;
 }
 
 /* アクセス */
 .access {
-  margin-top: 30px;
   display: flex;
+  flex-direction: column;
   gap: 20px;
 }
 
@@ -121,21 +120,18 @@ body {
 }
 
 .map {
-  width: 320px;
-  height: 240px;
+  width: 100%;
+  height: 220px;
   border: none;
-  pointer-events: none; /* 通常時は操作不可 */
-}
-
-.access-info {
-  font-size: 14px;
+  pointer-events: none;
 }
 
 .access-info ul {
   padding-left: 18px;
+  font-size: 14px;
 }
 
-/* ===== 地図モーダル ===== */
+/* 地図モーダル */
 .map-modal {
   display: none;
   position: fixed;
@@ -161,7 +157,29 @@ body {
   font-size: 32px;
   color: #fff;
   cursor: pointer;
-  z-index: 10000;
+}
+
+/* ===== PC表示 ===== */
+@media (min-width: 768px) {
+  .left {
+    width: 65%;
+  }
+
+  .right {
+    width: 35%;
+  }
+
+  .menu {
+    grid-template-columns: repeat(3, 1fr);
+  }
+
+  .access {
+    flex-direction: row;
+  }
+
+  .map {
+    height: 260px;
+  }
 }
 </style>
 </head>
@@ -173,7 +191,7 @@ body {
   <!-- 店名 -->
   <div class="shop-name">
     <div>店名</div>
-    <div>喫茶吉田　(架空教材)</div>
+    <div>喫茶吉田　架空教材</div>
   </div>
 
   <!-- メイン -->
@@ -185,6 +203,7 @@ body {
         <div>
           <strong>お知らせ</strong>
           <ul>
+            <li> 架空教材です！！ </li>
             <li>新メニューのお知らせ</li>
             <li>年末年始の営業</li>
           </ul>
@@ -193,7 +212,7 @@ body {
         <div>
           <strong>営業時間</strong><br>
           7:00〜20:00<br>
-          定休日　日曜日
+          定休日：日曜日
         </div>
       </div>
     </div>
@@ -203,11 +222,10 @@ body {
 
       <div class="owner-box">
         <strong>オーナー紹介</strong><br>
-        アイリス　吉田様<br>
-        実際にお話を聞いて、その人の好みに合った豆を挽いて淹れるオリジナルブレンドコーヒーがお勧めです。<br>
-        
-      　Wi-Fi設備で、仕事や勉強にも最適な環境を提供しています。
-       昭和レトロな店内を是非お楽しみください。
+        アイリス 吉田様<br><br>
+        お客様一人ひとりの好みに合わせて豆を挽き、丁寧に淹れるオリジナルブレンドが自慢です。<br>
+        Wi-Fi完備で、仕事や勉強にも最適。<br>
+        昭和レトロな空間をお楽しみください。
       </div>
     </div>
   </div>
@@ -216,12 +234,12 @@ body {
   <div class="section-title">メニュー</div>
 
   <div class="menu">
-    <div class="menu-item"><img src="images/scone.jpg">スコーン　税込300円　オーナーお勧め</div>
-    <div class="menu-item"><img src="images/cake.jpg">自家製ケーキ　税込500円</div>
-    <div class="menu-item"><img src="images/coffee.jpg">コーヒー　税込400円　オーナーお勧め</div>
-    <div class="menu-item"><img src="images/latte.jpg">カフェラテ　税込450円</div>
-    <div class="menu-item"><img src="images/sandwich.jpg">サンドイッチ　税込500円</div>
-    <div class="menu-item"><img src="images/pudding.jpg">固めのレトロプリン　税込300円</div>
+    <div class="menu-item"><img src="images/scone.jpg">スコーン<br>税込300円<br>オーナーお勧め</div>
+    <div class="menu-item"><img src="images/cake.jpg">自家製ケーキ<br>税込500円</div>
+    <div class="menu-item"><img src="images/coffee.jpg">コーヒー<br>税込400円<br>オーナーお勧め</div>
+    <div class="menu-item"><img src="images/latte.jpg">カフェラテ<br>税込450円</div>
+    <div class="menu-item"><img src="images/sandwich.jpg">サンドイッチ<br>税込500円</div>
+    <div class="menu-item"><img src="images/pudding.jpg">レトロプリン<br>税込300円</div>
   </div>
 
   <!-- アクセス -->
@@ -239,17 +257,14 @@ body {
     <div class="access-info">
       <ul>
         <li>香川県高松市常磐町1-3-1</li>
-        <li>創業　1974年</li>
-        <li>電話番号　090-0000-0000</li>
-        <li>
-          実際にお話を聞いて、その人の好みに合った豆を挽いて淹れるオリジナルブレンドコーヒーが特徴です。</li>
-
-        <li>Wi-Fi設備あり</li>
-        <li>支払方法　現金のみ対応</li>
-        <li>ペットは、テラス席に限り同伴可</li>
-        <li>子供連れ大歓迎
-          ベビーカーでの入店可、オムツの替え台あり</li>
-        <li>座席は、カウンター席6席、テーブル席6席</li>
+        <li>創業：1974年</li>
+        <li>電話：090-0000-0000</li>
+        <li>Wi-Fiあり</li>
+        <li>子供連れ大歓迎　ベビーカーでの入店可能でオムツの替え台あり。全席喫煙可なことは、ご了承ください。</li>
+        <li>席は、カウンター席6席、テーブル席6席</li>
+        
+        <li>支払方法：現金のみ</li>
+        <li>ペット：テラス席可</li>
         <li>全席喫煙可</li>
       </ul>
     </div>
@@ -257,12 +272,10 @@ body {
 
 </div>
 
-<!-- 全画面地図（★ここだけ変更） -->
+<!-- 全画面地図 -->
 <div class="map-modal" id="mapModal">
   <div class="map-close" onclick="closeMap()">×</div>
-  <iframe
-    src="https://www.google.com/maps?output=embed&hl=ja&q=香川県高松市常磐町1-3-1&z=18">
-  </iframe>
+  <iframe src="https://www.google.com/maps?q=香川県高松市常磐町1-3-1&z=18&output=embed"></iframe>
 </div>
 
 <script>
@@ -283,4 +296,3 @@ document.addEventListener("keydown", function(e) {
 
 </body>
 </html>
-
