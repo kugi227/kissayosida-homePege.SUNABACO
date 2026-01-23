@@ -2,7 +2,7 @@
 <html lang="ja">
 <head>
 <meta charset="UTF-8">
-<title>喫茶吉田　sunabaco架空教材</title>
+<title>喫茶吉田</title>
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
 
 <style>
@@ -13,125 +13,119 @@ body {
   color: #333;
 }
 
+/* ===== ヘッダー ===== */
+header {
+  position: fixed;
+  top: 0;
+  width: 100%;
+  height: 60px;
+  background: #000;
+  color: #fff;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  z-index: 1000;
+}
+
+.menu-btn {
+  position: absolute;
+  left: 15px;
+  font-size: 26px;
+  cursor: pointer;
+}
+
+header .title {
+  font-size: 20px;
+}
+
+/* ===== ハンバーガーメニュー ===== */
+nav {
+  position: fixed;
+  top: 60px;
+  left: -100%;
+  width: 100%;
+  background: #222;
+  transition: .3s;
+  z-index: 999;
+}
+
+nav.open {
+  left: 0;
+}
+
+nav a {
+  display: block;
+  padding: 20px;
+  color: #fff;
+  text-decoration: none;
+  border-bottom: 1px solid #444;
+}
+
+/* ===== セクション共通 ===== */
+section {
+  min-height: 100vh;
+  padding: 80px 20px 40px;
+  box-sizing: border-box;
+}
+
 .container {
-  max-width: 960px;
+  max-width: 900px;
   margin: 0 auto;
   background: #f6e9d9;
-  padding: 16px;
+  padding: 20px;
 }
 
-/* 店名 */
-.shop-name {
-  display: flex;
-  border: 2px solid #b8a38a;
-  margin-bottom: 20px;
-}
-
-.shop-name div {
-  padding: 10px;
-  background: #efe1cf;
-}
-
-.shop-name div:first-child {
-  width: 80px;
-  font-weight: bold;
-  text-align: center;
-}
-
-.shop-name div:last-child {
-  flex: 1;
-}
-
-/* メイン */
-.main {
-  display: flex;
-  gap: 20px;
-  flex-wrap: wrap;
-}
-
-.left, .right {
+img {
   width: 100%;
+  border-radius: 4px;
 }
 
-.left img,
-.right img {
-  width: 100%;
-  height: auto;
-  border-radius: 6px;
-}
-
-/* 情報 */
-.info {
-  margin-top: 15px;
-  display: flex;
-  gap: 20px;
-  flex-wrap: wrap;
-  font-size: 14px;
-}
-
-.info ul {
-  padding-left: 18px;
-}
-
-/* オーナー */
-.owner-box {
-  margin-top: 10px;
-  background: #efe1cf;
-  padding: 12px;
-  font-size: 14px;
-}
-
-/* セクション */
 .section-title {
   text-align: center;
   margin: 40px 0 20px;
   font-weight: bold;
   border-top: 1px solid #b8a38a;
   padding-top: 15px;
+  font-size: 28px;
 }
 
-/* メニュー */
+/* ===== メニュー ===== */
 .menu {
   display: grid;
-  grid-template-columns: repeat(2, 1fr);
-  gap: 16px;
+  grid-template-columns: repeat(3, 1fr);
+  gap: 20px;
 }
 
 .menu-item {
   text-align: center;
-  font-size: 14px;
+  font-size: 16px;
 }
 
-.menu-item img {
-  width: 100%;
-  height: auto;
-  border-radius: 6px;
+/* ===== オーナー ===== */
+.owner-box {
+  background: #efe1cf;
+  padding: 15px;
+  margin-top: 10px;
 }
 
-/* アクセス */
+/* ===== アクセス ===== */
 .access {
   display: flex;
-  flex-direction: column;
   gap: 20px;
 }
 
-.map-wrapper {
-  cursor: pointer;
-}
-
 .map {
-  width: 100%;
-  height: 220px;
+  width: 320px;
+  height: 240px;
   border: none;
   pointer-events: none;
 }
 
 .access-info ul {
   padding-left: 18px;
-  font-size: 14px;
 }
 
-/* 地図モーダル */
+/* ===== 地図モーダル ===== */
 .map-modal {
   display: none;
   position: fixed;
@@ -159,26 +153,19 @@ body {
   cursor: pointer;
 }
 
-/* ===== PC表示 ===== */
-@media (min-width: 768px) {
-  .left {
-    width: 65%;
-  }
-
-  .right {
-    width: 35%;
-  }
-
+/* ===== スマホ対応 ===== */
+@media (max-width: 768px) {
   .menu {
-    grid-template-columns: repeat(3, 1fr);
+    grid-template-columns: 1fr;
   }
 
   .access {
-    flex-direction: row;
+    flex-direction: column;
   }
 
   .map {
-    height: 260px;
+    width: 100%;
+    height: 240px;
   }
 }
 </style>
@@ -186,99 +173,116 @@ body {
 
 <body>
 
-<div class="container">
+<header>
+  <div class="menu-btn" onclick="toggleMenu()">☰</div>
+  <div class="title">喫茶吉田</div>
+</header>
 
-  <!-- 店名 -->
-  <div class="shop-name">
-    <div>店名</div>
-    <div>喫茶吉田　架空教材</div>
+<nav id="nav">
+  <a href="#shop" onclick="closeMenu()">店内紹介</a>
+  <a href="#owner" onclick="closeMenu()">オーナー紹介</a>
+  <a href="#menu" onclick="closeMenu()">メニュー</a>
+  <a href="#news" onclick="closeMenu()">お知らせ</a>
+  <a href="#time" onclick="closeMenu()">営業時間</a>
+  <a href="#access" onclick="closeMenu()">アクセス</a>
+</nav>
+
+<section id="shop">
+  <div class="container">
+    <div class="section-title">店内紹介</div>
+    <img src="images/shop.jpg" alt="店内写真">
   </div>
+</section>
 
-  <!-- メイン -->
-  <div class="main">
-    <div class="left">
-      <img src="images/shop.jpg" alt="店内写真">
+<section id="owner">
+  <div class="container">
+    <div class="section-title">オーナー紹介</div>
+    <img src="images/owner.jpg" alt="オーナー写真">
+    <div class="owner-box">
+      アイリス 吉田様<br>
+      実際にお話を聞いて、その人の好みに合った豆を挽いて淹れる
+      オリジナルブレンドコーヒーがお勧めです。<br>
+      Wi-Fi設備で、仕事や勉強にも最適な環境を提供しています。<br>
+      昭和レトロな店内を是非お楽しみください。
+    </div>
+  </div>
+</section>
 
-      <div class="info">
-        <div>
-          <strong>お知らせ</strong>
-          <ul>
-            <li> 架空教材です！！ </li>
-            <li>新メニューのお知らせ</li>
-            <li>年末年始の営業</li>
-          </ul>
-        </div>
+<section id="menu">
+  <div class="container">
+    <div class="section-title">メニュー</div>
+    <div class="menu">
+      <div class="menu-item"><img src="images/scone.jpg">スコーン 税込300円 オーナーお勧め</div>
+      <div class="menu-item"><img src="images/cake.jpg">自家製ケーキ 税込500円</div>
+      <div class="menu-item"><img src="images/coffee.jpg">コーヒー 税込400円 オーナーお勧め</div>
+      <div class="menu-item"><img src="images/latte.jpg">カフェラテ 税込450円</div>
+      <div class="menu-item"><img src="images/sandwich.jpg">サンドイッチ 税込500円</div>
+      <div class="menu-item"><img src="images/pudding.jpg">固めのレトロプリン 税込300円</div>
+    </div>
+  </div>
+</section>
 
-        <div>
-          <strong>営業時間</strong><br>
-          7:00〜20:00<br>
-          定休日：日曜日
-        </div>
+<section id="news">
+  <div class="container">
+    <div class="section-title">お知らせ</div>
+    <ul>
+      <li>新メニューのお知らせ</li>
+      <li>年末年始の営業</li>
+    </ul>
+  </div>
+</section>
+
+<section id="time">
+  <div class="container">
+    <div class="section-title">営業時間</div>
+    7:00〜20:00<br>
+    定休日 日曜日
+  </div>
+</section>
+
+<section id="access">
+  <div class="container">
+    <div class="section-title">アクセス</div>
+
+    <div class="access">
+      <div onclick="openMap()">
+        <iframe class="map"
+          src="https://www.google.com/maps?q=香川県高松市常磐町1-3-1&z=15&output=embed"
+          loading="lazy"></iframe>
+      </div>
+
+      <div class="access-info">
+        <ul>
+          <li>香川県高松市常磐町1-3-1</li>
+          <li>創業 1974年</li>
+          <li>電話番号 090-0000-0000</li>
+          <li>オリジナルブレンドコーヒーが特徴です。</li>
+          <li>Wi-Fi設備あり</li>
+          <li>支払方法 現金のみ対応</li>
+          <li>ペットはテラス席のみ可</li>
+          <li>子供連れ大歓迎（ベビーカー可）</li>
+          <li>カウンター6席、テーブル6席</li>
+          <li>全席喫煙可</li>
+        </ul>
       </div>
     </div>
-
-    <div class="right">
-      <img src="images/owner.jpg" alt="オーナー写真">
-
-      <div class="owner-box">
-        <strong>オーナー紹介</strong><br>
-        アイリス 吉田様<br><br>
-        お客様一人ひとりの好みに合わせて豆を挽き、丁寧に淹れるオリジナルブレンドが自慢です。<br>
-        Wi-Fi完備で、仕事や勉強にも最適。<br>
-        昭和レトロな空間をお楽しみください。
-      </div>
-    </div>
   </div>
+</section>
 
-  <!-- メニュー -->
-  <div class="section-title">メニュー</div>
-
-  <div class="menu">
-    <div class="menu-item"><img src="images/scone.jpg">スコーン<br>税込300円<br>オーナーお勧め</div>
-    <div class="menu-item"><img src="images/cake.jpg">自家製ケーキ<br>税込500円</div>
-    <div class="menu-item"><img src="images/coffee.jpg">コーヒー<br>税込400円<br>オーナーお勧め</div>
-    <div class="menu-item"><img src="images/latte.jpg">カフェラテ<br>税込450円</div>
-    <div class="menu-item"><img src="images/sandwich.jpg">サンドイッチ<br>税込500円</div>
-    <div class="menu-item"><img src="images/pudding.jpg">レトロプリン<br>税込300円</div>
-  </div>
-
-  <!-- アクセス -->
-  <div class="section-title">アクセス</div>
-
-  <div class="access">
-    <div class="map-wrapper" onclick="openMap()">
-      <iframe
-        class="map"
-        src="https://www.google.com/maps?q=香川県高松市常磐町1-3-1&z=15&output=embed"
-        loading="lazy">
-      </iframe>
-    </div>
-
-    <div class="access-info">
-      <ul>
-        <li>香川県高松市常磐町1-3-1</li>
-        <li>創業：1974年</li>
-        <li>電話：090-0000-0000</li>
-        <li>Wi-Fiあり</li>
-        <li>子供連れ大歓迎　ベビーカーでの入店可能でオムツの替え台あり。全席喫煙可なことは、ご了承ください。</li>
-        <li>席は、カウンター席6席、テーブル席6席</li>
-        
-        <li>支払方法：現金のみ</li>
-        <li>ペット：テラス席可</li>
-        <li>全席喫煙可</li>
-      </ul>
-    </div>
-  </div>
-
-</div>
-
-<!-- 全画面地図 -->
 <div class="map-modal" id="mapModal">
   <div class="map-close" onclick="closeMap()">×</div>
-  <iframe src="https://www.google.com/maps?q=香川県高松市常磐町1-3-1&z=18&output=embed"></iframe>
+  <iframe src="https://www.google.com/maps?output=embed&q=香川県高松市常磐町1-3-1&z=18"></iframe>
 </div>
 
 <script>
+function toggleMenu() {
+  document.getElementById("nav").classList.toggle("open");
+}
+
+function closeMenu() {
+  document.getElementById("nav").classList.remove("open");
+}
+
 function openMap() {
   document.getElementById("mapModal").classList.add("active");
 }
@@ -288,12 +292,9 @@ function closeMap() {
 }
 
 document.addEventListener("keydown", function(e) {
-  if (e.key === "Escape") {
-    closeMap();
-  }
+  if (e.key === "Escape") closeMap();
 });
 </script>
 
 </body>
 </html>
-
